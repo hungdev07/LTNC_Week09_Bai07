@@ -7,7 +7,7 @@ public class PathServiceTest {
   @Test
   void test() {
     PathService ps = new PathService();
-    String result = ps.getPathFailed("data", "config.txt");
+    String result = ps.getPathSuccess("data", "config.txt");
     assertEquals("data/config.txt", result);
   }
 }
