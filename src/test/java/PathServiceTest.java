@@ -8,6 +8,6 @@ public class PathServiceTest {
   void test() {
     PathService ps = new PathService();
     String result = ps.getPathSuccess("data", "config.txt");
-    assertEquals("data/config.txt", result);
+    assertEquals("data\\config.txt", result);
   }
 }
