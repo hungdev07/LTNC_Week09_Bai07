@@ -1,0 +1,30 @@
+name: Automated Code Review
+
+on:
+  pull_request:
+    branches:
+      - main # Trigger khi có PR hướng vào nhánh main
+
+jobs:
+  checkstyle:
+    name: Checkstyle Review
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 25 # Hoặc phiên bản bạn đang dùng
+        uses: actions/setup-java@v4
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+
+      # Chạy Checkstyle và đẩy comment trực tiếp vào PR
+      - name: Run Checkstyle
+        uses: dbelyaev/action-checkstyle@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          level: warning # Hoặc 'error' để đánh dấu lỗi nặng
+          reporter: github-pr-review # Đăng comment trực tiếp vào dòng code lỗi
+          filter_mode: added_lines # Chỉ kiểm tra những dòng code mới được thêm/sửa
