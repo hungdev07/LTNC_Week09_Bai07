@@ -21,6 +21,7 @@ jobs:
       with:
         java-version: '25'
         distribution: 'temurin'
+        cache: 'maven'
 
     #4. Chạy verify (Bao gồm cả test và check coverage)
     - name: Build with Maven
