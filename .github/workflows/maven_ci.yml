@@ -23,13 +23,14 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    #4. Thực thi Maven Build Lifecycle (Test & Package)
+    #4. Chạy verify (Bao gồm cả test và check coverage)
     - name: Build with Maven
-      run: mvn clean package
+      run: mvn clean verify
 
-    #5. Lưu trữ file .jar (Artifacts)
-    - name: Upload Build Artifact
+    # Lưu trữ báo cáo JaCoCo
+    - name: Upload JaCoCo Report
+      if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: my-app-jar
-        path: target/*.jar
+        name: jacoco-report
+        path: target/site/jacoco/
