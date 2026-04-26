@@ -1,0 +1,32 @@
+name: maven_ci.yml
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 2. Checkout mã nguồn từ Github
+    - uses: actions/checkout@v4
+
+    #3. Thiết lập môi trường JDK
+    - name: Set up JDK 25
+      uses: actions/setup-java@v4
+      with:
+        java-version: '25'
+        distribution: 'temurin'
+        cache: maven
+
+    #4. Thực thi Maven Build Lifecycle (Test & Package)
+    - name: Build with Maven
+      run: mvn clean package
+
+    #5. Lưu trữ file .jar (Artifacts)
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-app-jar
+        path: target/*.jar
