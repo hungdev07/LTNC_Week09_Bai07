@@ -25,6 +25,5 @@ jobs:
         uses: dbelyaev/action-checkstyle@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          level: warning # Hoặc 'error' để đánh dấu lỗi nặng
-          reporter: github-pr-review # Đăng comment trực tiếp vào dòng code lỗi
-          filter_mode: added_lines # Chỉ kiểm tra những dòng code mới được thêm/sửa
+          checkstyle_config: sun_checks.xml  # hoặc tệp cấu hình tùy chỉnh của bạn
+          level: warning
